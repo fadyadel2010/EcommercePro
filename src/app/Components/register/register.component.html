@@ -1,0 +1,188 @@
+
+@if(SpinnerLoading){
+    <div class="spinner">
+        <div class="spinner-grow text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-secondary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-success" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-danger" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-warning" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-info" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-light" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-dark" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+    </div>
+}
+
+<section class="py-2 my-2 rounded-4 w-75 mx-auto ">
+    <div class="container">
+        @if(errormsg)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error!</strong> {{errormsg}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+        }
+        <h1 class="h3 text-success fw-bold mb-4 h1Marg">Register</h1>
+
+        <form [formGroup]="RegisterForm" (ngSubmit)="SubminRegister()">
+            <div class="my-2">      
+                <input [ngClass] = "{
+                    'is-valid' : !RegisterForm.get('name')?.errors && RegisterForm.get('name')?.touched,
+                    'is-invalid' :RegisterForm.get('name')?.errors && RegisterForm.get('name')?.touched && RegisterForm.get('name')?.dirty
+                }" class="form-control w-75 mx-auto" type="text" placeholder="Name:" formControlName="name">
+                @if(RegisterForm.get('name')?.errors && RegisterForm.get('name')?.touched)
+                {
+                    <div class="m-0 alert alert-danger fw-bold w-75 mx-auto text-dark">
+                        @if(RegisterForm.get('name')?.getError('required'))
+                        {
+                            <p>*Name Is Requierd</p>
+                        }
+                        @else if (RegisterForm.get('name')?.getError('minlength')) {
+
+                            <p>*Minimum Length Is 3 Char</p>
+                        }
+                        @else if (RegisterForm.get('name')?.getError('maxlength')) {
+
+                            <p>*Maximum Lenght Is 20 Char</p>
+                        }
+                       
+                      
+                       
+                    </div>
+                }
+                
+            </div>
+            <div class="my-4">      
+                <input [ngClass]="{
+                    'is-valid' :!RegisterForm.get('email')?.errors && RegisterForm.get('email')?.touched,
+                    'is-invalid' :RegisterForm.get('email')?.errors && RegisterForm.get('email')?.touched && RegisterForm.get('email')?.dirty
+                }" class="form-control w-75 mx-auto" type="email" placeholder="Email:" formControlName="email">
+                <div class="my-2">      
+                    @if(RegisterForm.get('email')?.errors && RegisterForm.get('email')?.touched)
+                    {
+                        <div class="m-0 alert alert-danger fw-bold w-75 mx-auto text-dark">
+                            @if(RegisterForm.get('email')?.getError('required'))
+                            {
+                                <p>*Email Is Requierd</p>
+                            }
+                            @else if (RegisterForm.get('email')?.getError('email')) {
+    
+                                <p>*Not Vaild Email!</p>
+                            }
+                           
+                           
+                          
+                           
+                        </div>
+                    }
+                    
+                </div>
+            </div>
+            <div class="my-4">      
+                <input [ngClass]="{
+                    'is-valid' : !RegisterForm.get('phone')?.errors && RegisterForm.get('phone')?.touched,
+                    'is-invalid' :RegisterForm.get('phone')?.errors && RegisterForm.get('phone')?.touched && RegisterForm.get('name')?.dirty
+
+                }" class="form-control w-75 mx-auto" type="tel" placeholder="Phone:" formControlName="phone">
+                @if(RegisterForm.get('phone')?.errors && RegisterForm.get('phone')?.touched){
+                    <div class="w-75 mx-auto alert alert-danger text-dark fw-bold m-0">
+                        @if(RegisterForm.get('phone')?.getError('required'))
+                        {
+                            <p>*Phone Number Is Requierd</p>
+
+                        }
+                        @else if (RegisterForm.get('phone')?.getError('pattern')) {
+
+                            <p>*Not Vaild PhoneNumber!</p>
+
+                        }
+                    </div>
+                }
+              
+            </div>
+            <div class="my-4">      
+                <input [ngClass]="{
+                    'is-valid' : !RegisterForm.get('password')?.errors && RegisterForm.get('password')?.touched,
+                    'is-invalid' :RegisterForm.get('password')?.errors && RegisterForm.get('password')?.touched && RegisterForm.get('name')?.dirty
+                }" class="form-control w-75 mx-auto" type="password" placeholder="password:" formControlName="password">
+                @if(RegisterForm.get('password')?.errors && RegisterForm.get('password')?.touched)
+                {
+                    <div class="w-75 mx-auto alert alert-danger text-dark fw-bold m-0">
+                        @if(RegisterForm.get('password')?.getError('required'))
+                        {
+                            <p>*Password Is Requierd</p>
+
+                        }
+                        @else if (RegisterForm.get('password')?.getError('pattern')) {
+                            <p class="form-text">  At least one upper case</p>
+                            <p class="form-text">  At least one lower case</p>
+                            <p class="form-text">  At least one digit</p>
+                            <p class="form-text">  At least one special character</p>
+                            <p class="form-text"> Minimum eight in length</p>
+                        }
+                        
+                          
+                            
+                    </div>
+                }
+               
+            </div>
+            <div class="my-4">      
+                <input [ngClass]="{
+                    'is-valid' : !RegisterForm.get('rePassword')?.errors && RegisterForm.get('rePassword')?.touched,
+                    'is-invalid' :RegisterForm.get('rePassword')?.errors && RegisterForm.get('rePassword')?.touched && RegisterForm.get('name')?.dirty
+                }" class="form-control w-75 mx-auto" type="password" placeholder="RePassword:" formControlName="rePassword">
+                @if(RegisterForm.getError('mismatch') && RegisterForm.get('rePassword')?.touched)
+                {
+                    <div class="w-75 mx-auto alert alert-danger text-dark fw-bold m-0">
+                        <p>Confirm Password mismatch Password</p>
+                    </div>
+                }
+               
+
+            </div>
+    
+            <div class="d-flex justify-content-end marg">
+                <button [disabled]="RegisterForm.invalid" class="btn-main fw-bold">Register
+                    @if(isloading){
+                        <span><i class="fas fa-spin fa-spinner "></i></span> 
+                    }
+              
+                </button>
+
+            </div>
+        </form>
+      
+    </div>
+
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+        <symbol id="check-circle-fill" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+        </symbol>
+        <symbol id="info-fill" viewBox="0 0 16 16">
+          <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+        </symbol>
+        <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
+          <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </symbol>
+      </svg>
+
+   
+   
+</section>
+

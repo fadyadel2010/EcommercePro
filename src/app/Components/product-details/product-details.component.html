@@ -1,0 +1,91 @@
+@if (ProductDara) {
+
+    <section class="py-5">
+        <div class="container">
+          <div class="row gx-5">
+            <aside class="col-lg-6">
+                <owl-carousel-o [options]="MainOptions">
+
+                    @for (x of ProductDara.images; track $index) {
+                      <ng-template carouselSlide >
+                          <div>
+                            <img style="max-width: 100%; max-height: 70vh; margin: auto;" class="rounded-4 fit" [src]= "x" title={{ProductDara.title}} />
+          
+                          </div>
+                        </ng-template>
+                    }
+                    
+              
+                </owl-carousel-o>
+              <div class="d-flex justify-content-center mb-3">
+                @for (ProductImges of ProductDara.images; track $index) {
+                    <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" [href]="ProductImges" class="item-thumb">
+                        <img width="60" height="60" class="rounded-2" [src]= "ProductImges" title={{ProductDara.title}} />
+                      </a>
+                }
+                
+               
+              </div>
+              <!-- thumbs-wrap.// -->
+              <!-- gallery-wrap .end// -->
+            </aside>
+            <main class="col-lg-6">
+              <div class="ps-lg-3">
+                <h4 class="title text-dark">
+                 {{ProductDara.title}}
+                </h4>
+                <div class="d-flex flex-row my-3">
+                  <div class="text-warning mb-1 me-2">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span class="ms-1">
+                      {{ProductDara.ratingsAverage}}
+                    </span>
+                  </div>
+                  <span class="text-muted"><i class="fas fa-shopping-basket fa-sm mx-1"></i>{{ProductDara.quantity}} orders</span>
+                  <span class="text-success ms-2">In stock</span>
+                </div>
+      
+                <div class="mb-3">
+                  <span class="h5">${{ProductDara.price}}</span>
+                  <span class="text-muted">/per one</span>
+                </div>
+      
+                <p>
+                  {{ProductDara.description}}
+                </p>
+      
+                <div class="row">
+                  <dt class="col-3">Type:</dt>
+                  <dd class="col-9">{{ProductDara.category.name}}</dd>
+      
+                  <dt class="col-3">Color</dt>
+                  <dd class="col-9">make ur choice</dd>
+      
+                  <dt class="col-3">Material</dt>
+                  <dd class="col-9">Cotton, Jeans</dd>
+      
+                  <dt class="col-3">Brand</dt>
+                  <dd class="col-9">{{ProductDara.brand.name}}</dd>
+                </div>
+      
+                <hr />
+      
+            
+                <div class="d-flex flex-row gap-2">
+                    <a  class="btn-main" (click)="producttocart(ProductDara.id)"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </a>
+                    <a  class="btn bnt-main border icon-hover " (click)="AddtoWishList(ProductDara.id)"> <i class="me-1 fa fa-heart fa-lg "></i> Save </a>
+                </div>
+                
+              </div>
+            </main>
+          </div>
+        </div>
+      </section>
+
+
+}
+

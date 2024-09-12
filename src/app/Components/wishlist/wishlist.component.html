@@ -1,0 +1,64 @@
+<div class="cart-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main-heading mb-10 fw-bold text-success">My wishlist</div>
+                <div class="table-wishlist">
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th width="45%">Product Name</th>
+                                <th width="15%">Unit Price</th>
+                                <th width="15%">Stock Status</th>
+                                <th width="15%"></th>
+                                <th width="10%"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            
+                            @if (ProductWishlistCount == 0 ) {
+                               
+                                <div class="d-flex justify-content-center align-items-center mt-3">
+                                    <h1 class="fw-bold text-success">Your wishlist Is Empty!</h1>
+                                </div>          
+
+                            }
+
+                            @else {
+                                @for (item of ProductsList; track $index) {
+
+                                
+                                    <tr>
+                                        <td width="45%" [routerLink]="['/details' , item.id]" class="cursor-pointer">
+                                            <div class="display-flex align-center">
+                                                <div class="img-product">
+                                                    <img [src]="item.imageCover" alt="" class="mCS_img_loaded">
+                                                </div>
+                                                <div class="name-product fw-bold fs-5">
+                                                    {{item.title}}
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td width="15%" class="price">{{item.price}}</td>
+                                        <td width="15%"><span class="in-stock-box ">In Stock</span></td>
+                                        <td width="15%"><button class="round-black-btn small-btn cursor-pointer" (click)="AddToCart(item.id)">Add to Cart</button></td>
+                                        <td width="10%" class="text-center cursor-pointer"><a (click)="RemoveProduct(item.id)" class="trash-icon"><i class="far fa-trash-alt"></i></a></td>
+                                        
+                                    </tr>
+                                }
+                            }
+                                
+                            
+
+                            
+                           
+                          
+                          
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
